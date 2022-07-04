@@ -1,8 +1,8 @@
 - 👋 Hi, I’m @bytheprogrammer
-- 👀 I’m interested in ...
-- 🌱 I’m currently learning 
-- 💞️ I’m looking to collaborate on ...
-- 📫 How to reach me ...
+- 👀 I’m interested in computer science 
+- 🌱 I’m currently learning c# and sql
+- 💞️ I’m looking to collaborate on software developments
+- 📫 How to reach me bedirhanyanik30@gmail.com
 
 <!---
 bytheprogrammer/bytheprogrammer is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
