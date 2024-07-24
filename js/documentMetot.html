@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <h1 id="manset">İlk Manşet</h1>
+    <p id="ilk"></p>
+    <p id="ikinci"></p>
+    <img src="Bayrak.jpeg" id="bayrak" onmouseover="karabayrak()" onmouseout="albayrak()">
+    <script>
+        // icerik degistirme
+        document.getElementById("manset").innerHTML = "Son Manşet";
+        // gorsellestirme
+        document.getElementById("manset").style.color = "red";
+        document.getElementById("manset").style.fontFamily = "Arial";
+        document.getElementById("ilk").innerHTML = "<b>ilk paragraf....</b>";
+        document.getElementById("ikinci").innerText = "ikinci paragraf...";
+        // ozellik degistirme
+        var bayragimiz = document.getElementById("bayrak");
+        function albayrak() {
+            bayragimiz.src = "bayrak.jpeg";
+        }
+        function karabayrak() {
+            bayragimiz.src = "bayrak2.jpeg";
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <script>
+            class Daire{
+                constructor(yaricap){
+                    this.yaricap=yaricap;
+                }
+                alan(){
+                    return 3.14*this.yaricap*this.yaricap;
+                }
+                cevre(){
+                    return 2*3.14*this.yaricap;
+                }
+            }
+            var r=Number(prompt("yaricap: "));
+            var d1= new Daire(r);
+            document.write("Alan= "+d1.alan());
+            document.write("<br>");
+            document.write("Cevre= "+d1.cevre());
+        </script>
+    </body>
+</html>

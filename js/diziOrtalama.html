@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <script>
+            var dizi=new Array();
+            var n=Number(prompt("eleman sayisi: "));
+            for(var i=0; i<n; i++)
+            dizi[i]=Number(prompt(i+" indisli eleman: "));
+        var toplam=0, ort=0;
+        for(var i=0; i<n; i++)
+        toplam=toplam+dizi[i];
+            ort=toplam/n;
+            document.write("ortalama: "+toplam/n);
+
+        </script>
+    </body>
+</html>

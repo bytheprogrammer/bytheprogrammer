@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <script>
+            class Ucgen{
+                static genislik=0;
+                static yukseklik=0;
+                alan(){
+                    return (this.genislik*this.yukseklik)/2;
+                }
+            }
+            var u1=new Ucgen();
+            u1.genislik=Number(prompt("genislik degeri: "));
+            u1.yukseklik=Number(prompt("yukseklik degeri: "));
+            document.write("Alan= "+u1.alan());
+        </script>
+    </body>
+</html>
