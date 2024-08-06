@@ -1,3 +1,90 @@
+/* content.js */
+/* ------------------ */
+
+// Global değişkenler
+let storeArray = [];
+let seenStores = new Set();
+
+const storeInfo = () => {
+    // Select all store containers
+    const storeContainers = document.querySelectorAll('div.UaQhfb.fontBodyMedium');
+
+    // Mağaza adı ve telefon numarasını eşleştir
+    storeContainers.forEach(container => {
+        // Find store name and phone number within the container
+        const storeName = container.querySelector('.qBF1Pd.fontHeadlineSmall')?.textContent.trim();
+        const phoneNumber = container.querySelector('span.UsdlK')?.textContent.trim();
+
+        // Mağaza adı ve telefon numarasını birleştir
+        if (storeName && phoneNumber) {
+            const storeKey = `${storeName} | ${phoneNumber}`;
+        
+
+            // Eğer mağaza daha önce eklenmemişse, array'e ekle ve Set'e ekle
+            if (storeKey) {
+                storeArray.push({
+                    [`mağaza ${storeArray.length + 1}`]: {
+                        "mağaza adı": storeName,
+                        "telefon numarası": phoneNumber
+                    }
+                });
+                seenStores.add(storeKey);
+            }
+        }
+    });
+
+    // Array'i konsola yazdır
+    console.log(storeArray);
+
+    // JSON dosyası oluştur ve indir
+    const jsonBlob = new Blob([JSON.stringify(storeArray, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(jsonBlob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'storeData.json';
+    a.click();
+    URL.revokeObjectURL(url);
+}
+
+const addButton = () => {
+    // Google Maps'in body'sini seç
+    const body = document.querySelector('body.LoJzbe');
+    
+    if (body) {
+        // Eğer buton zaten eklenmişse, tekrar ekleme
+        if (!document.getElementById('showButton')) {
+            // Yeni buton oluştur
+            const showButton = document.createElement('button');
+            showButton.id = 'showButton';
+            showButton.textContent = 'SHOW';
+            showButton.style.cssText = `
+                position: fixed;
+                top: 10px;
+                right: 100px;
+                z-index: 1000;
+                padding: 8px 16px;
+                background-color: #4285F4;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                font-weight: bold;
+            `;
+
+            // Butona tıklama olayı ekle
+            showButton.addEventListener('click', () => {
+                console.log('SHOW butonu tıklandı!');
+                storeInfo();
+            });
+
+            // Butonu body'ye ekle
+            body.appendChild(showButton);
+        }
+    } else {
+        console.log('Google Maps body bulunamadı');
+    }
+};
+
 const addWhatsAppIcons = () => {
     const phoneElements = document.querySelectorAll('button[data-tooltip="Telefon numarasını kopyala"]');
 
@@ -34,8 +121,6 @@ const addWhatsAppIcons = () => {
         whatsappIcon.style.height = '24px';
         whatsappIcon.style.verticalAlign = 'middle';
         whatsappIcon.style.marginLeft = '180px'; // Numaranın hemen yanında
-        whatsappIcon.style.zIndex = '1000'; // İkonu diğer elementlerin üstünde tutar
-        whatsappIcon.style.position = 'relative'; // Z-index etkili olsun diye
         whatsappIcon.style.pointerEvents = 'auto'; // Tıklanabilir olması için
 
         whatsappIcon.alt = 'WhatsApp';
@@ -61,22 +146,38 @@ const addWhatsAppIcons = () => {
         });
     });
 };
-
-// MutationObserver kurulumu
+    
+// MutationObserver'ı güncelle
 const observer = new MutationObserver((mutations) => {
     for (let mutation of mutations) {
         if (mutation.type === 'childList') {
-            addWhatsAppIcons();
+            setTimeout(() => {
+                addWhatsAppIcons();
+                addButton();
+            }, [2000]); // 2 saniye bekle
             break;
         }
     }
 });
 
+// Gözlemlenecek hedefi değiştir
+observer.observe(document.querySelector('div[role="main"]') || document.body, { childList: true, subtree: true });
+
 observer.observe(document.body, { childList: true, subtree: true });
 
 // Sayfa yüklendiğinde de çalıştır
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', addWhatsAppIcons);
+    document.addEventListener('DOMContentLoaded', () => {
+        // İlk yüklenme durumunda butonun hemen eklenmesini sağlamak için setTimeout kullanabiliriz
+        setTimeout(() => {
+            addWhatsAppIcons();
+            addButton();
+            storeInfo();
+        }, 2000);
+    });
 } else {
+    // Sayfa zaten yüklenmişse hemen çalıştır
     addWhatsAppIcons();
+    addButton();
+    storeInfo();
 }
