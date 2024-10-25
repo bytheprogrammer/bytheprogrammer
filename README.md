@@ -1,6 +1,6 @@
 - 👋 Hi, I’m @bytheprogrammer
 - 👀 I’m interested in computer science 
-- 🌱 I’m currently learning react and bootstrap
+- 🌱 I’m currently learning javascript, react and bootstrap
 - 💞️ I’m looking to collaborate on software developments
 - 📫 How to reach me bedirhanyanik30@gmail.com
 
